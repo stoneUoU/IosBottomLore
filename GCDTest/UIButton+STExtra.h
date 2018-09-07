@@ -6,8 +6,25 @@
 //  Copyright © 2018年 com.youlu. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface UIButton_STExtra : NSObject
+typedef void(^STBtnActCallBack)(UIButton *button);
+
+@interface UIButton (STExtraBtn)
+
+
+/**
+ *  @brief replace the method 'addTarget:forControlEvents:'
+ */
+- (void)addStCallBackAct:(STBtnActCallBack)callBack forControlEvents:(UIControlEvents)controlEvents;
+
+/**
+ *  @brief replace the method 'addTarget:forControlEvents:UIControlEventTouchUpInside'
+ *  the property 'alpha' being 0.5 while 'UIControlEventTouchUpInside'
+ */
+- (void)addStClickAct:(STBtnActCallBack)callBack;
+
+- (void)setStCallBack:(STBtnActCallBack)callBack;
+- (STBtnActCallBack)getMHCallBack;
 
 @end

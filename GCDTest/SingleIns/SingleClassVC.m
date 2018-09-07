@@ -17,6 +17,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    SingleClass *singleCls1 = [SingleClass shareIns];
+    SingleClass *singleCls2 = [SingleClass shareIns];
+    SingleClass *singleCls3 = [SingleClass shareIns];
+    STLog(@"%@",singleCls1);
+    STLog(@"%@",singleCls2);
+    STLog(@"%@",singleCls3);
+
+    UIView *uiView1 = [[UIView alloc] init];
+    UIView *uiView2 = [[UIView alloc] init];
+    UIView *uiView3 = [[UIView alloc] init];
+    STLog(@"%@",uiView1);
+    STLog(@"%@",uiView2);
+    STLog(@"%@",uiView3);
 }
 
 - (void)didReceiveMemoryWarning {

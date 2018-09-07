@@ -10,4 +10,6 @@
 
 @interface SingleClass : NSObject
 
++(id) shareIns;
+
 @end

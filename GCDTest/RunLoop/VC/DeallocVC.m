@@ -10,13 +10,17 @@
 #import "NSTimer+Pluto.h"
 #import "NextVC.h"
 #import "STWeakProxy.h"
+#import "RunLoopVC.h"
 @interface DeallocVC ()
 @property(nonatomic,strong) NSTimer *timer;
 
 @property (strong, nonatomic)   UIButton  *testBtn;  /**< 打印Btn */
+
+@property (nonatomic) SEL selectedSelector;
 @end
 
 @implementation DeallocVC
+
 - (id)init
 {
     self = [super init ];//当前对象self
@@ -40,9 +44,9 @@
     //    }];
     //    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            STLog(@"定时器调用+2");
-        }];
+//        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//            STLog(@"定时器调用+2");
+//        }];
 
     //    [NSTimer scheduledTimerWithTimeInterval:1.0
     //                                     target:self
@@ -53,6 +57,7 @@
     //[NSTimer stScheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil];
     
     //[NSTimer scheduledTimerWithTimeInterval:1.0 target:[STWeakProxy proxyWithTarget:self] selector:@selector(updateTime:) userInfo:nil repeats:YES];
+    STLog(@"%@",_pass_vals[@"demoID"]);
 }
 
 -(void)setUI{

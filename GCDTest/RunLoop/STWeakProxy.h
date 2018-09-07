@@ -1,5 +1,5 @@
 //
-//  WeakProxy.h
+//  STWeakProxy.h
 //  GCDTest
 //
 //  Created by Stone on 2018/6/25.
@@ -29,5 +29,4 @@
  */
 + (instancetype)proxyWithTarget:(id)target;
 
-@end
 @end

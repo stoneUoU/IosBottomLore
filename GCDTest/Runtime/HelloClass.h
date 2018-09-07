@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface HelloClass : NSObject
-
+- (void)hello;
++ (HelloClass *)hi;
 @end

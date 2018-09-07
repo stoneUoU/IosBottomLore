@@ -10,6 +10,6 @@
 
 @implementation Person
 -(void)toPlay:(NSString *)str andIdx:(NSString *)idx{
-    NSLog(@"去哪个城市玩------------%@============%@",str,idx);
+    STLog(@"去哪个城市玩------------%@============%@",str,idx);
 }
 @end

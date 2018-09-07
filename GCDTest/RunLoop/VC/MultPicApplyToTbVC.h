@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MultPicApplyToTbV.h"
+@interface MultPicApplyToTbVC : UIViewController<MultPicApplyToTbVDel>
 
-@interface MultPicApplyToTbVC : UIViewController
+@property (nonatomic,strong)MultPicApplyToTbV *multPicApplyToTbV; //将strong 改成-> weak  会在页面销毁时走dealloc方法
 
 @end

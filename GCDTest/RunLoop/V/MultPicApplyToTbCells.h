@@ -10,4 +10,15 @@
 
 @interface MultPicApplyToTbCells : UITableViewCell
 
+@property (nonatomic ,strong) UILabel *title;
+
+@property (nonatomic ,strong) UIImageView *leftIMV;
+
+@property (nonatomic ,strong) UIImageView *midIMV;
+
+@property (nonatomic ,strong) UIImageView *rightIMV;
+
+@property (nonatomic ,strong) UILabel *infos;
+
+
 @end

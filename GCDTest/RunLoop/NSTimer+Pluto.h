@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSTimer (Pluto)
-
+/**
+ *  创建一个不会造成循环引用的循环执行的Timer
+ */
++ (instancetype)stScheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo;
 @end

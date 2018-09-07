@@ -10,13 +10,4 @@
 
 @interface MsgSendVC : UIViewController<UITextViewDelegate,UITextFieldDelegate>
 
-//UITextView：
-//@property (strong, nonatomic) UITextView *textV;
-//
-////UITextView：
-//@property (strong, nonatomic) UITextField *textFieldV;
-//
-////UITextView：
-//@property (strong, nonatomic) UIButton *testBtn;
-
 @end

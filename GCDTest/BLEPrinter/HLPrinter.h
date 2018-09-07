@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, HLTextAlignment) {
 typedef NS_ENUM(NSInteger, HLFontSize) {
     HLFontSizeTitleSmalle = 0x00,
     HLFontSizeTitleMiddle = 0x11,
-    HLFontSizeTitleBig = 0x22
+    HLFontSizeTitleBig = 0x18
 };
 
 @interface HLPrinter : NSObject
@@ -180,6 +180,8 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  @return 最终的data
  */
 - (NSData *)getFinalData;
+
+- (void)appendNewLine;
 
 
 @end

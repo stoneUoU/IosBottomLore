@@ -7,7 +7,23 @@
 //
 
 #import "AppDelegate.h"
-
+#import "GCDTestVC.h"
+#import "NSOperationQueueVC.h"
+#import "MsgSendVC.h"
+#import "ReSolveMsgVC.h"
+#import "SingleClassVC.h"
+#import "TestPrintVC.h"
+#import "MethodExVC.h"
+#import "RunLoopVC.h"
+#import "MultPicApplyToTbVC.h"
+#import "NextVC.h"  //测试线程
+#import "ReGCDVC.h"
+#import "ReNSOperationVC.h"
+#import "NetCheckVC.h"
+#import "KVOVC.h"
+#import "ReviewRunLoopVC.h"
+#import "ReViewKVOVC.h"
+#import "AgainGCDVC.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +33,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    CATransition *anim = [[CATransition alloc] init];
+    anim.type = @"rippleEffect";
+    anim.duration = 1.0;
+    [self.window.layer addAnimation:anim forKey:nil];
+    [self.window makeKeyAndVisible];
+    // afn网络中间类
+    [NetCheckTools sharedIns];
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[AgainGCDVC alloc] init]];
+
+    //关闭设置为NO, 默认值为NO.  键盘监听
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     return YES;
 }
 
@@ -49,3 +81,25 @@
 
 
 @end
+
+//打卡,今日复习了：
+//ios runtime 技术：
+//为类动态添加成员变量（objc_setAssociatedObject  objc_getAssociatedObject）
+//为类动态添加类方法、成员方法 (resolveInstanceMethod resolveClassMethod)
+//class_addMethod(self, sel, (IMP)comeMethod, "v@:@");     void comeMethod(id self, SEL _cmd, NSString *vals,NSString *otherVals) {};
+//class_addMethod(objc_getMetaClass("Person"), sel, (IMP)funcArchieve, "v@:@:@");     void funcArchieve(id self, SEL _cmd, NSString *vals,NSString *otherVals,NSInteger ids){};
+//完全了解ios的消息转发机制（1.动态方法解析，2.备用接收者，3.完整转发，4.未找到方法实现）
+//1.resolveInstanceMethod resolveClassMethod
+//2.forwardingTargetForSelector
+//3.methodSignatureForSelector  forwardInvocation   invokeWithTarget
+//方法交换
+//class_getClassMethod   class_getInstanceMethod  method_exchangeImplementations
+//
+//ios单例的实现:
+//static SingleClass *_shareIns = nil;
+//static dispatch_once_t onceToken;
+//dispatch_once(&onceToken, ^{
+//    _shareIns = [[super allocWithZone:NULL] init];
+//});
+//allocWithZone:(struct _NSZone *)zone
+//copyWithZone:(struct _NSZone *)zone

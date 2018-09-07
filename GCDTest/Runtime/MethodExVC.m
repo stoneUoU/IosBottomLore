@@ -7,7 +7,7 @@
 //
 
 #import "MethodExVC.h"
-
+#import "UIImage+change_m.h"
 @interface MethodExVC ()
 
 @end
@@ -16,22 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
+
+    UIImageView *IMV = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenW - 200)/2, (ScreenH - 200)/2, 200, 200)];
+    IMV.image = [UIImage imageNamed:@"appUpdate_bg"];
+    [self.view addSubview:IMV];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

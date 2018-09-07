@@ -33,7 +33,6 @@
 //并发队列的并发功能只有在异步（dispatch_async）函数下才有效
 
 //串行队列，GCD 提供了的一种特殊的串行队列：主队列（Main Dispatch Queue）
-
 //对于并发队列，GCD 默认提供了全局并发队列（Global Dispatch Queue）
 
 - (void)viewDidLoad {

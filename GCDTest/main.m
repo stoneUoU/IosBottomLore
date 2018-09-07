@@ -11,6 +11,10 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        //NSLog(@"开始");
+        //ios程序在这里开启了一个RunLoop循环，只会打印开始，不会打印结束
+        int ids = UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        //NSLog(@"结束");
+        return ids;
     }
 }

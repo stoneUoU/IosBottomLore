@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SingleClass.h"
 @interface SingleClassVC : UIViewController
 
 @end

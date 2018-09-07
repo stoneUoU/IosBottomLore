@@ -33,7 +33,7 @@
 - (void)defaultSetting
 {
     _printerData = [[NSMutableData alloc] init];
-    
+
     // 1.初始化打印机
     Byte initBytes[] = {0x1B,0x40};
     [_printerData appendBytes:initBytes length:sizeof(initBytes)];
@@ -133,10 +133,10 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:22.0]};
     NSAttributedString *valueAttr = [[NSAttributedString alloc] initWithString:text attributes:dict];
     int valueWidth = valueAttr.size.width;
-    
+
     // 2.设置偏移量
     [self setOffset:368 - valueWidth];
-    
+
     // 3.设置文字
     [self setText:text];
 }
@@ -205,7 +205,7 @@
     NSInteger kLength = info.length + 3;
     NSInteger pL = kLength % 256;
     NSInteger pH = kLength / 256;
-    
+
     Byte dataBytes [] = {0x1D,0x28,0x6B,pL,pH,0x31,0x50,48};
     //    Byte dataBytes [] = {29,40,107,pL,pH,49,80,48};
     [_printerData appendBytes:dataBytes length:sizeof(dataBytes)];
@@ -300,23 +300,34 @@
     if (!isTitle) {
         offset = 10;
     }
-    
     if (left) {
-        [self setText:left maxChar:10];
+        if (!isTitle) {
+            [self setText:[NSString stringWithFormat:@"  %@",left]];
+        }else{
+            [self setText:[NSString stringWithFormat:@"%@",left]];
+        }
     }
-    
     if (middle) {
-        [self setOffset:200 + offset];
-        [self setText:middle];
+        [self setOffset:60 + offset];
+        [self setText:middle maxChar:16];
     }
-    
     if (right) {
-        [self setOffset:300 + offset];
+        if (isTitle) {
+            [self setOffset:320 + offset];
+        }else{
+            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            NSData *data = [right dataUsingEncoding:enc];
+            if(data.length > 0 && data.length <= 3){
+                [self setOffset:300 + offset];
+            }else if(data.length >= 4 && data.length <= 6){
+                [self setOffset:296 + offset];
+            }else{
+                [self setOffset:285 + offset];
+            }
+        }
         [self setText:right];
     }
-    
     [self appendNewLine];
-    
 }
 
 #pragma mark 图片
@@ -325,19 +336,19 @@
     if (!image) {
         return;
     }
-    
+
     // 1.设置图片对齐方式
     [self setAlignment:alignment];
-    
+
     // 2.设置图片
     UIImage *newImage = [image imageWithscaleMaxWidth:maxWidth];
-    
+
     NSData *imageData = [newImage bitmapData];
     [_printerData appendData:imageData];
-    
+
     // 3.换行
     [self appendNewLine];
-    
+
     // 4.打印图片后，恢复文字的行间距
     Byte lineSpace[] = {0x1B,0x32};
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
@@ -400,9 +411,10 @@
 {
     [self appendSeperatorLine];
     if (!footerInfo) {
-        footerInfo = @"谢谢惠顾，欢迎下次光临！";
+        footerInfo = @"";
     }
     [self appendText:footerInfo alignment:HLTextAlignmentCenter];
+    [self appendNewLine];
 }
 
 - (NSData *)getFinalData
@@ -411,3 +423,39 @@
 }
 
 @end
+
+
+//NSInteger offset = 0;
+//if (!isTitle) {
+//    offset = 10;
+//}
+
+//if (left) {
+//    [self setText:left maxChar:18];
+//}
+//
+//if (middle) {
+//    if (isTitle) {
+//        [self setOffset:245 + offset];
+//    }else{
+//        [self setOffset:250 + offset];
+//    }
+//    [self setText:middle];
+//}
+//
+//if (right) {
+//    if (isTitle) {
+//        [self setOffset:320 + offset];
+//    }else{
+//        NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//        NSData *data = [right dataUsingEncoding:enc];
+//        if(data.length > 0 && data.length <= 3){
+//            [self setOffset:300 + offset];
+//        }else if(data.length >= 4 && data.length <= 6){
+//            [self setOffset:292 + offset];
+//        }else{
+//            [self setOffset:285 + offset];
+//        }
+//    }
+//    [self setText:right];
+//    }

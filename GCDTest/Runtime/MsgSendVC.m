@@ -19,46 +19,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
-    // Do any additional setup after loading the view.
-
-//    _textV = [[UITextView alloc] initWithFrame:CGRectMake(50, 120, 200, 100)];
-//    _textV.delegate = self;
-//    _textV.font = [UIFont systemFontOfSize:16];
-//    [self.view addSubview:_textV];
-//
-//    _textFieldV = [[UITextField alloc] initWithFrame:CGRectMake(50, 250, 200, 40)];
-//    _textFieldV.delegate = self;
-//    _textFieldV.backgroundColor = [UIColor whiteColor];
-//    _textFieldV.font = [UIFont systemFontOfSize:16];
-//    [self.view addSubview:_textFieldV];
-//
-//    _testBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 320, 200, 100)];
-//    _testBtn.font = [UIFont systemFontOfSize:16];
-//    [_testBtn setTitle:@"测试" forState:UIControlStateNormal];
-//    [self.view addSubview:_testBtn];
-
+    self.view.backgroundColor = [UIColor whiteColor];
 
     Person *stone = [[Person alloc] init];
-    //stone.age = 24;
-    //[stone toPlay];
-    [stone setAge:24];
 
-    //[stone performSelector:@selector(toPlay:) withObject:@"厦门"];
-
-    if (![stone respondsToSelector:@selector(toPlay:andIdx:)]){
-        [stone performSelector:@selector(toPlay:andIdx:) withObject:@"厦门" withObject:@"UUUUUUUUUUUU"];
+    if ([stone respondsToSelector:@selector(toPlay:andIdx:)]){
+        [stone performSelector:@selector(toPlay:andIdx:) withObject:@"厦门" withObject:@"厦门大学"];
     }
-    objc_msgSend(stone, @selector(toPlay:andIdx:),@"厦门",@"ooooooooooo");
-
-    //objc_msgSend(stone,@selector(toPlay:),@"厦门");
-
+    objc_msgSend(stone, @selector(toPlay:andIdx:),@"厦门",@"环岛路");
+    
     objc_msgSend(stone, @selector(toDo:),@"厦门",@"鼓浪屿");
 
     [stone performSelector:@selector(toDo:) withObject:@"厦门" withObject:@"五缘湾"];
 
+    objc_msgSend([Person class], @selector(toFunc:),@"toFunc",@"厦门",10);
+
     //给Person类动态添加属性
-    //NSLog(@"%ld",(long)stone.age);
+    stone.age = 24;
+    STLog(@"%ld",(long)stone.age);
 
 }
 //点击空白处，键盘消失

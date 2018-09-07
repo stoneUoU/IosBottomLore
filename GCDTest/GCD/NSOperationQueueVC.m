@@ -35,7 +35,7 @@
 //NSOperation 需要配合 NSOperationQueue 来实现多线程。因为默认情况下，NSOperation 单独使用时系统同步执行操作，配合 NSOperationQueue 我们能更好的实现异步执行
 
 //NSOperation 实现多线程的使用步骤分为三步：
-
+//
 //创建操作：先将需要执行的操作封装到一个 NSOperation 对象中。
 //创建队列：创建 NSOperationQueue 对象。
 //将操作加入到队列中：将 NSOperation 对象添加到 NSOperationQueue 对象中。
@@ -139,16 +139,15 @@
     // 2.添加操作
     [queue addOperationWithBlock:^{
         // 执行完 for 循环，开始执行跌各个添加操作
-        [queue addOperationWithBlock:^{
+        for (int i = 0; i < 2; i++) {
             [NSThread sleepForTimeInterval:2]; // 模拟耗时操作
+            NSLog(@"1");
+        }
+        [queue addOperationWithBlock:^{
             for (int i = 0; i < 2; i++) {
                 NSLog(@"2");
             }
         }];
-
-        for (int i = 0; i < 2; i++) {
-            NSLog(@"1");
-        }
     }];
     //Res:  是 1 1 2 2
     //异步都不会阻塞线程

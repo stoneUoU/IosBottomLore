@@ -11,5 +11,5 @@
 @interface DeallocVC : UIViewController<DeallocVDel>
 
 @property (nonatomic,strong)DeallocV *deallocV; //将strong 改成-> weak  会在页面销毁时走dealloc方法
-
+@property (nonatomic,copy)NSDictionary *pass_vals;
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2018年 com.youlu. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface ReSolveMsgVC : NSObject
+@interface ReSolveMsgVC : UIViewController
 
 @end

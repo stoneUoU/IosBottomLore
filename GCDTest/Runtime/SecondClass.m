@@ -9,5 +9,8 @@
 #import "SecondClass.h"
 
 @implementation SecondClass
-
+- (void) forwardInvocationMethod
+{
+    STLog(@"消息被转发到这了哈");
+}
 @end

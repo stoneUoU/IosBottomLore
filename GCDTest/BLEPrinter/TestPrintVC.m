@@ -38,7 +38,7 @@
     [self.view addSubview:_tableV];
 
     _testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    _testBtn.frame = CGRectMake((UIScreen.mainScreen.bounds.size.width-120)/2, 450, 120, 60);
+    _testBtn.frame = CGRectMake((UIScreen.mainScreen.bounds.size.width-120)/2, 450, 300, 60);
     _testBtn.backgroundColor = [UIColor redColor];
     [_testBtn setTitle:@"打印" forState:UIControlStateNormal];
     [_testBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -61,48 +61,41 @@
 - (HLPrinter *)getPrinter
 {
     HLPrinter *printer = [[HLPrinter alloc] init];
-    NSString *title = @"有路科技";
-    NSString *str1 = @"江西省有路科技有限公司";
+    [printer appendText:@"收据" alignment:HLTextAlignmentCenter];
+    [printer appendNewLine];
+    NSString *title = @"呱呱购订单";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-    [printer appendText:str1 alignment:HLTextAlignmentCenter];
-    //    [printer appendBarCodeWithInfo:@"RN3456789012"];
-    //    [printer appendSeperatorLine];
-    //
-    //    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-    //    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-    //    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
     [printer appendSeperatorLine];
-    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
+    [printer appendLeftText:@"数量" middleText:@"产品" rightText:@"总计" isTitle:YES];
+    [printer appendSeperatorLine];
     CGFloat total = 0.0;
     NSDictionary *dict1 = @{@"name":@"Macbook Pro 13.3寸",@"amount":@"5",@"price":@"8888.00"};
-    NSDictionary *dict2 = @{@"name":@"我是林磊，了解一下",@"amount":@"1",@"price":@"1.0"};
+    NSDictionary *dict2 = @{@"name":@"我是林磊，了解一下我是林磊，了解一下我是林磊，了解",@"amount":@"1",@"price":@"26.00"};
     NSArray *goodsArray = @[dict1, dict2];
     for (NSDictionary *dict in goodsArray) {
-        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
+        [printer appendLeftText:dict[@"amount"] middleText:dict[@"name"] rightText:dict[@"price"] isTitle:NO];
         total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
     }
+    [printer appendTitle:@"总计:" value:@"40.00"];
+    [printer appendNewLine];
+    [printer appendText:@"订单明细" alignment:HLTextAlignmentCenter];
+    [printer appendNewLine];
+    [printer appendTitle:@"支付金额:" value:@"26.00"];
+    [printer appendTitle:@"支付方式:" value:@"微信支付"];
+    [printer appendTitle:@"订单编号:" value:@"3180523120800905637" valueOffset:150];
+    [printer appendTitle:@"操作员:" value:@"张安民"];
+    [printer appendNewLine];
     [printer appendSeperatorLine];
-    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
-    [printer appendTitle:@"总计:" value:totalStr];
-    [printer appendTitle:@"实收:" value:@"100.00"];
-    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
-    [printer appendTitle:@"找零:" value:leftStr];
-
-    //    [printer appendSeperatorLine];
-    //
-    //    [printer appendText:@"位图方式二维码" alignment:HLTextAlignmentCenter];
-    //    [printer appendQRCodeWithInfo:@"www.baidu.com"];
-    //
-    //    [printer appendSeperatorLine];
-    //    [printer appendText:@"指令方式二维码" alignment:HLTextAlignmentCenter];
-    //    [printer appendQRCodeWithInfo:@"www.baidu.com" size:10];
-    //
-    //    [printer appendFooter:nil];
-    //    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
-
-    // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
-    // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer
-    // 截取屏幕快照，可以用UIWebView+UIImage中的catogery方法 - (UIImage *)imageForWebView
+    [printer appendNewLine];
+    [printer appendNewLine];
+    [printer appendText:@"欢迎你再次光临！" alignment:HLTextAlignmentCenter];
+    [printer appendNewLine];
+    [printer appendText:@"客服电话" alignment:HLTextAlignmentCenter];
+    [printer appendNewLine];
+    [printer appendText:@"400-5555-666" alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+    [printer appendNewLine];
+    [printer appendNewLine];
+    [printer appendFooter:nil];
 
     return printer;
 }

@@ -10,4 +10,7 @@
 
 @interface NextVC : UIViewController
 
+/// 总票数(共享的资源)
+@property (nonatomic,assign) int tickets;
+
 @end

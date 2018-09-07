@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (change_m)
-
+@interface UIImage(change_m)
+//+ (UIImage *)st_imageNamed:(NSString *)name;
 @end

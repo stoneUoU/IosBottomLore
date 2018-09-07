@@ -8,6 +8,8 @@
 
 #import "RunLoopVC.h"
 #import "DeallocVC.h"
+
+
 @interface RunLoopVC ()
 @property (strong, nonatomic)   UIButton  *testBtn;  /**< 打印Btn */
 
@@ -15,7 +17,6 @@
 @end
 
 @implementation RunLoopVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -124,16 +125,16 @@
 //        // Fallback on earlier versions
 //    }
     //异步开启子线程运行相应的代码
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSTimer * timer = [NSTimer timerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
-            static int count = 0;
-            [NSThread sleepForTimeInterval:2];
-            //休息一秒钟，模拟耗时操作
-            NSLog(@"===========%d",count++);
-        }];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-        [[NSRunLoop currentRunLoop] run];
-    });
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        NSTimer * timer = [NSTimer timerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+//            static int count = 0;
+//            [NSThread sleepForTimeInterval:2];
+//            //休息一秒钟，模拟耗时操作
+//            NSLog(@"===========%d",count++);
+//        }];
+//        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//        [[NSRunLoop currentRunLoop] run];
+//    });
 }
 
 //-(void)longrun{
@@ -162,14 +163,9 @@
     [_testBtn addTarget:self action:@selector(toPrint:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_testBtn];
 }
-
-
 -(void)toPrint:(UIButton *)sender{
-    //方式一：
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.navigationController pushViewController:[[DeallocVC alloc] init] animated:YES];
-    });
-    
+    //[MGJRouter openURL:@"mgj://market/detail?id=7&&demoID=林磊"];
+    [MGJRouter openURL:@"mgj://market/demo" withUserInfo:@{@"user_Name": @"林磊"} completion:nil];
 }
 -(void)timerDesc:(NSTimer *)timer{
     STLog(@"++倒计时走起来++++++++++++%@",[timer.userInfo objectForKey:@"para"]);
