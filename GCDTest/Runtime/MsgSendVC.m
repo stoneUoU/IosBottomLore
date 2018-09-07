@@ -41,6 +41,7 @@
 }
 //点击空白处，键盘消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
     [self.view endEditing:YES];
 }
 - (void)didReceiveMemoryWarning {
